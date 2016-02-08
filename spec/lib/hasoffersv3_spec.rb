@@ -21,18 +21,5 @@ describe HasOffersV3 do
       expect(subject.configuration.host).to_not eq(HasOffersV3::Configuration::DEFAULTS[:host])
     end
   end
-
-  context 'api' do
-    subject { HasOffersV3.new }
-
-    describe '#offers' do
-      it 'should get offers for current connection' do
-        offer = double('HasOffersV3::Offer')
-        expect(HasOffersV3::Offer).to receive(:new).and_return(offer)
-        expect(offer).to receive(:find_all)
-        subject.offers.find_all
-      end
-    end
-  end
 end
 

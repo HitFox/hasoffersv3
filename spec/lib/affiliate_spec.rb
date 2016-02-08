@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HasOffersV3::Affiliate do
-  subject { HasOffersV3::Affiliate.new }
+  subject { HasOffersV3::Affiliate }
 
   let(:url)  { api_url 'Affiliate' }
 
@@ -19,9 +19,9 @@ describe HasOffersV3::Affiliate do
 
   describe '.find_by_id', :no_stub do
     it 'should make a proper request call' do
-      stub_call :get, nil, Regexp.new(url)
+      stub_call :post, nil, Regexp.new(url)
       response = subject.find_by_id id: 1
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'findById', 'id' => '1'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findById', 'id' => '1'}))).to have_been_made
       validate_call response
     end
 
@@ -69,10 +69,10 @@ describe HasOffersV3::Affiliate do
     end
   end
 
-  describe '.get_tier' do
+  describe '.get_affiliate_tier' do
     it 'should make a proper request call' do
       stub_call
-      response = subject.get_tier id: 1
+      response = subject.get_affiliate_tier id: 1
       expect(a_request(:post, url).with(body: hash_including({'Method' => 'getAffiliateTier','id' => '1'}))).to have_been_made
       validate_call response
     end

@@ -59,6 +59,5 @@ class HasOffersV3
     def base_uri
       configuration.base_uri
     end
-
   end
 end

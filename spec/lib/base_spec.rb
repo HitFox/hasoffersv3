@@ -1,27 +1,20 @@
 require 'spec_helper'
 
 describe HasOffersV3::Base do
-  subject { HasOffersV3::Base }
+  subject { HasOffersV3::Base.new(:test) }
 
-  let(:url) { Regexp.new api_url('Base') }
+  let(:url) { Regexp.new api_url('test') }
 
-  describe :requires! do
-    it 'raise ArgumentError is parameters are missing' do
-      expect { subject.requires!({}, [:dummy]) }.to raise_error(ArgumentError)
-    end
-  end
-
-  describe ".get_request" do
+  describe ".post_request" do
     it "should make a proper request" do
-      stub_call :get
-      response = subject.get_request 'test'
-      request = a_request(:get, url).with(query: hash_including('Method' => 'test'))
+      stub_call :post
+      response = subject.post_request 'test'
+      request = a_request(:post, url).with(body: hash_including('Method' => 'test'))
       expect(request).to have_been_made
       validate_call response
     end
 
     context "with HTTPS enabled" do
-
       before(:each) do
         @old_protocol = HasOffersV3.configuration.protocol
         HasOffersV3.configuration.protocol = 'https'
@@ -32,9 +25,9 @@ describe HasOffersV3::Base do
       end
 
       it "should make a proper request" do
-        stub_call :get
-        response = subject.get_request 'test'
-        expect(a_request(:get, url).with(query: hash_including('Method' => 'test'))).to have_been_made
+        stub_call :post
+        response = subject.post_request 'test'
+        expect(a_request(:post, url).with(body: hash_including('Method' => 'test'))).to have_been_made
         validate_call response
       end
     end
