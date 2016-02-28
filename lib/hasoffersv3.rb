@@ -7,8 +7,7 @@ require 'yaml'
 class HasOffersV3
   class << self
     def const_missing(name)
-      target = name.to_s.split('_').map(&:capitalize).join
-      Base.new(target)
+      Base.new(name.to_s)
     end
 
     def configuration=(config)
