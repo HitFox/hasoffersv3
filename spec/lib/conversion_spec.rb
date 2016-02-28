@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe HasOffersV3::Conversion do
-  subject { HasOffersV3::Conversion.new }
+  subject { HasOffersV3::Conversion }
 
   let(:url)  { Regexp.new api_url('Conversion') }
 
   before :each do
-    stub_call :get
+    stub_call :post
   end
 
   describe '.find_all' do
     it 'should make a proper request call' do
       response = subject.find_all
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'findAll'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findAll'}))).to have_been_made
       validate_call response
     end
   end
@@ -20,7 +20,7 @@ describe HasOffersV3::Conversion do
   describe '.find_added_conversions' do
     it 'should make a proper request call' do
       response = subject.find_added_conversions
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'findAddedConversions'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findAddedConversions'}))).to have_been_made
       validate_call response
     end
   end
@@ -28,7 +28,7 @@ describe HasOffersV3::Conversion do
   describe '.find_updated_conversions' do
     it 'should make a proper request call' do
       response = subject.find_updated_conversions
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'findUpdatedConversions'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findUpdatedConversions'}))).to have_been_made
       validate_call response
     end
   end
@@ -36,7 +36,7 @@ describe HasOffersV3::Conversion do
   describe '.findAll' do
     it 'should make a proper request call' do
       response = subject.find_all
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'findAll'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findAll'}))).to have_been_made
       validate_call response
     end
 

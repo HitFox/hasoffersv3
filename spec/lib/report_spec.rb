@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HasOffersV3::Report do
-  subject { HasOffersV3::Report.new }
+  subject { HasOffersV3::Report }
   let(:url)  { api_url 'Report' }
 
   describe '.get_conversions' do
@@ -32,11 +32,11 @@ describe HasOffersV3::Report do
   describe '.get_mod_summary_logs' do
     let(:url)  { Regexp.new api_url('Report') }
 
-    before(:each) { stub_call :get }
+    before(:each) { stub_call :post }
 
     it 'should make a proper request call' do
       response = subject.get_mod_summary_logs
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'getModSummaryLogs'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'getModSummaryLogs'}))).to have_been_made
       validate_call response
     end
   end
@@ -44,11 +44,11 @@ describe HasOffersV3::Report do
   describe '.getModSummaryLogs' do
     let(:url)  { Regexp.new api_url('Report') }
 
-    before(:each) { stub_call :get }
+    before(:each) { stub_call :post }
 
     it 'should make a proper request call' do
       response = subject.get_mod_summary_logs
-      expect(a_request(:get, url).with(query: hash_including({'Method' => 'getModSummaryLogs'}))).to have_been_made
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'getModSummaryLogs'}))).to have_been_made
       validate_call response
     end
 
@@ -56,6 +56,5 @@ describe HasOffersV3::Report do
       expect(subject).to receive(:get_mod_summary_logs).with({test: 1})
       subject.get_mod_summary_logs test: 1
     end
-
   end
 end

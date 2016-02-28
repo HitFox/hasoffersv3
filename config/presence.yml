@@ -1,0 +1,54 @@
+offer:
+  find_all_by_ids: [ids]
+  find_all_ids_by_advertiser_id: [advertiser_id]
+  find_all_ids_by_affiliate_id: [affiliate_id]
+  find_by_id: [id]
+  get_groups: [id]
+  get_groups: [id]
+  get_approved_affiliate_ids: [id]
+  set_payout: [id, affiliate_id]
+  remove_payout: [id, affiliate_id]
+  generate_tracking_link: [offer_id, affiliate_id]
+  get_tier_payouts: [id]
+
+advertiser_billing:
+  create_invoice: [data]
+  find_invoice_by_id: [id]
+  add_invoice_item: [invoice_id, data]
+  remove_invoice_item: [id]
+
+advertiser:
+  find_by_id: [id]
+
+affiliate:
+  find_by_id: [id]
+  create:
+    data: [zipcode, company]
+  get_tier: [id]
+
+affiliate_billing:
+  find_last_invoice: [affiliate_id]
+  create_invoice: [data]
+  find_invoice_by_id: [id]
+  add_invoice_item: [invoice_id, data]
+  remove_invoice_item: [id]
+
+affiliate_offer:
+  find_by_id: [id]
+  get_categories: [ids]
+  get_target_countries: [ids]
+  generate_tracking_link: [offer_id]
+
+employee:
+  find_all_by_ids: [ids]
+  find_by_id: [id]
+
+offer_pixel:
+  find_all_by_ids: [ids]
+  find_by_id: [id]
+  get_allowed_types: [offer_id]
+
+raw_log:
+  get_download_link: [log_type, log_filename]
+  list_date_dirs: [log_type]
+  list_logs: [log_type, date_dir]

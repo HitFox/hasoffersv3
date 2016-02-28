@@ -57,11 +57,13 @@ describe HasOffersV3::AdvertiserBilling do
       it 'makes a proper request call' do
         stub_call
         response = subject.add_invoice_item(invoice_id: 1, data: {memo: 'abc'})
-        a_request(:post, url).with(body: hash_including({
-          'Method'     => 'addInvoiceItem',
-          'invoice_id' => '1',
-          'data'       => {'memo' => 'abc'}
-        })).should have_been_made
+        expect(
+          a_request(:post, url).with(body: hash_including({
+            'Method'     => 'addInvoiceItem',
+            'invoice_id' => '1',
+            'data'       => {'memo' => 'abc'}
+          }))
+        ).to have_been_made
         validate_call response
       end
     end
@@ -84,7 +86,9 @@ describe HasOffersV3::AdvertiserBilling do
       it 'makes a proper request call' do
         stub_call
         response = subject.remove_invoice_item(id: '1')
-        a_request(:post, url).with(body: hash_including({'Method' => 'removeInvoiceItem', 'id' => '1'})).should have_been_made
+        expect(
+          a_request(:post, url).with(body: hash_including({'Method' => 'removeInvoiceItem', 'id' => '1'}))
+        ).to have_been_made
         validate_call response
       end
     end

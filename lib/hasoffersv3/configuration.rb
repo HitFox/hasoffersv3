@@ -1,15 +1,20 @@
 class HasOffersV3
   class Configuration
+    attr_reader :options
 
-    def self.default_json_driver
-      @_default_json_driver ||=
-          if defined?(Oj)
-            Oj
-          elsif defined?(MultiJson)
-            MultiJson
-          else
-            JSON
-          end
+    class << self
+      def default_json_driver
+        @_default_json_driver ||= begin
+          return Oj if defined?(Oj)
+          return MultiJson if defined?(MultiJson)
+          JSON
+        end
+      end
+
+      def presence
+        path = File.expand_path('../../../config/presence.yml', __FILE__)
+        YAML.load_file(path)
+      end
     end
 
     DEFAULTS = {
@@ -19,7 +24,8 @@ class HasOffersV3
       base_path: '/v3',
       network_id: '',
       api_key: '',
-      json_driver: self.default_json_driver
+      json_driver: default_json_driver,
+      presence: presence
     }.freeze
 
     DEFAULTS.keys.each do |option_name|
@@ -31,8 +37,6 @@ class HasOffersV3
         @options[option_name] = val
       end
     end
-
-    attr_reader :options
 
     def initialize(options={})
       defaults = DEFAULTS.dup
@@ -52,6 +56,5 @@ class HasOffersV3
     def base_uri
       "#{protocol}://#{host}#{base_path}"
     end
-
   end
 end

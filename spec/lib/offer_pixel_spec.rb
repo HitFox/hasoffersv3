@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HasOffersV3::OfferPixel do
-  subject { HasOffersV3::OfferPixel.new }
+  subject { HasOffersV3::OfferPixel }
 
   let(:url) { api_url 'OfferPixel' }
 
