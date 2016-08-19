@@ -1,4 +1,4 @@
-### Overview 
+### Overview
 
 [![Build status](https://api.travis-ci.org/applift/hasoffersv3.png?branch=master)](http://travis-ci.org/applift/hasoffersv3)
 
@@ -10,10 +10,8 @@ This gem provides a wrapper around HasOffers API in version 3, [HasOffers APIv3 
 
 Supported ruby versions:
 
-*   1.9.3
-*   2.0
-*   2.1
 *   2.2
+*   2.3
 
 ## Installation
 
