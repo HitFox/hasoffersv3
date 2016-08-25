@@ -9,5 +9,9 @@ class HasOffersV3
     def get_mod_summary_logs(params = {}, &block)
       get_request 'getModSummaryLogs', params, &block
     end
+
+    def get_stats(params = {}, &block)
+      post_request 'getStats', params, &block
+    end
   end
 end

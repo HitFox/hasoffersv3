@@ -22,4 +22,14 @@ describe HasOffersV3::Report do
       validate_call response
     end
   end
+
+  describe '#get_stats' do
+    before(:each) { stub_call }
+
+    it 'makes a proper request call' do
+      response = subject.get_stats
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'getStats'}))).to have_been_made
+      validate_call response
+    end
+  end
 end
