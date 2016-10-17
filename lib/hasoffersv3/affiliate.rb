@@ -9,6 +9,11 @@ class HasOffersV3
       get_request 'findById', params
     end
 
+    def update(params = {})
+      requires! params, [:id, :data]
+      post_request 'update', params
+    end
+
     def update_payment_method_wire(params = {})
       post_request 'updatePaymentMethodWire', params
     end
