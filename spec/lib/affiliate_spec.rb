@@ -28,6 +28,24 @@ describe HasOffersV3::Affiliate do
     end
   end
 
+  describe '#update' do
+    it 'makes a proper request call' do
+      response = subject.update id: 1, data: {}
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'update'}))).to have_been_made
+      validate_call response
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.create data: {} }.to raise_error ArgumentError
+      end
+
+      it 'fails without data' do
+        expect { subject.create id: 1 }.to raise_error ArgumentError
+      end
+    end
+  end
+
   describe '#update_payment_method_wire' do
     it 'makes a proper request call' do
       response = subject.update_payment_method_wire
