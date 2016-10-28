@@ -169,4 +169,58 @@ describe HasOffersV3::Offer do
       expect { subject.get_tier_payouts }.to raise_error ArgumentError
     end
   end
+
+  describe '#create' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.create data: { name: "Test" }
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'create', 'data' => {'name' => 'Test'}}))
+      ).to have_been_made
+      validate_call response
+    end
+
+    it 'fails without data' do
+      expect { subject.create }.to raise_error ArgumentError
+    end
+  end
+
+  describe '#unblock_affilate' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.unblock_affilate id: 1, affiliate_id: 123
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'unblockAffilate','id' => '1','affiliate_id' => '123'}))
+      ).to have_been_made
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.unblock_affilate affiliate_id: 1}.to raise_error ArgumentError
+      end
+      it 'fails without affiliate_id' do
+        expect { subject.unblock_affilate id: 10 }.to raise_error ArgumentError
+      end
+    end
+  end
+
+
+  describe '#add_target_country' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.add_target_country id: 1, country_code: 'US'
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'addTargetCountry','id' => '1','country_code' => 'US'}))
+      ).to have_been_made
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.add_target_country country_code: 1}.to raise_error ArgumentError
+      end
+      it 'fails without country_code' do
+        expect { subject.add_target_country id: 10 }.to raise_error ArgumentError
+      end
+    end
+  end
 end
