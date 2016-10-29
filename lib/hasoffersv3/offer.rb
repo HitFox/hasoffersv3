@@ -1,5 +1,15 @@
 class HasOffersV3
   class Offer < Base
+    def add_target_country(params)
+      requires! params, [:id, :country_code]
+      post_request 'addTargetCountry', params
+    end
+
+    def create(params = {})
+      requires! params, [:data]
+      post_request 'create', params
+    end
+
     def find_all(params = {})
       post_request 'findAll', params
     end
@@ -57,6 +67,11 @@ class HasOffersV3
     def get_tier_payouts(params = {})
       requires! params, [:id]
       post_request 'getTierPayouts', params
+    end
+
+    def unblock_affilate(params = {})
+      requires! params, [:id, :affiliate_id]
+      post_request 'unblockAffilate', params
     end
   end
 end
