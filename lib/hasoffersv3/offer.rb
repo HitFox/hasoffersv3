@@ -1,5 +1,11 @@
 class HasOffersV3
   class Offer < Base
+
+    def add_group(params)
+      requires! params, [:id, :group_id]
+      post_request 'addGroup', params
+    end
+
     def add_target_country(params)
       requires! params, [:id, :country_code]
       post_request 'addTargetCountry', params

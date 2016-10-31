@@ -196,7 +196,7 @@ describe HasOffersV3::Offer do
 
     context 'when required params are missing' do
       it 'fails without id' do
-        expect { subject.unblock_affilate affiliate_id: 1}.to raise_error ArgumentError
+        expect { subject.unblock_affilate affiliate_id: 1 }.to raise_error ArgumentError
       end
       it 'fails without affiliate_id' do
         expect { subject.unblock_affilate id: 10 }.to raise_error ArgumentError
@@ -216,10 +216,29 @@ describe HasOffersV3::Offer do
 
     context 'when required params are missing' do
       it 'fails without id' do
-        expect { subject.add_target_country country_code: 1}.to raise_error ArgumentError
+        expect { subject.add_target_country country_code: 1 }.to raise_error ArgumentError
       end
       it 'fails without country_code' do
         expect { subject.add_target_country id: 10 }.to raise_error ArgumentError
+      end
+    end
+  end
+
+  describe '#add_group' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.add_group id: 1, group_id: 123
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'addGroup','id' => '1','group_id' => '123'}))
+      ).to have_been_made
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.add_group group_id: 1 }.to raise_error ArgumentError
+      end
+      it 'fails without group_id' do
+        expect { subject.add_group id: 10 }.to raise_error ArgumentError
       end
     end
   end
