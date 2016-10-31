@@ -1,3 +1,10 @@
+# 0.5.2
+- [#54] Added Offer::addGroup method
+- [#51] Added Offer::create, Offer::addTargetCountry and Offer::unblockAffiliate methods
+
+# 0.5.1
+- [#50] Added Affiliate::update method
+
 # 0.4.0
 - [#42] Support "Employee": findAll, find_all_by_ids and find_by_id
 - [#41] Added config option `read_timeout` to changed default timeout to 60
