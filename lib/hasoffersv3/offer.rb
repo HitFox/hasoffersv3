@@ -1,6 +1,5 @@
 class HasOffersV3
   class Offer < Base
-
     def add_group(params)
       requires! params, [:id, :group_id]
       post_request 'addGroup', params
@@ -75,9 +74,9 @@ class HasOffersV3
       post_request 'getTierPayouts', params
     end
 
-    def unblock_affilate(params = {})
+    def unblock_affiliate(params = {})
       requires! params, [:id, :affiliate_id]
-      post_request 'unblockAffilate', params
+      post_request 'unblockAffiliate', params
     end
   end
 end
