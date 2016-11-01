@@ -49,6 +49,11 @@ class HasOffersV3
       post_request 'getApprovedAffiliateIds', params
     end
 
+    def set_affiliate_approval(params = {})
+      requires! params, [:id, :affiliate_id, :status]
+      post_request 'setAffiliateApproval', params
+    end
+
     def set_payout(params = {})
       requires! params, [:id, :affiliate_id]
       post_request 'setPayout', params

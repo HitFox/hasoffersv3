@@ -242,4 +242,26 @@ describe HasOffersV3::Offer do
       end
     end
   end
+
+  describe '#set_affiliate_approval' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.set_affiliate_approval id: 1, affiliate_id: 123, status: 'approved'
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'setAffiliateApproval','id' => '1','affiliate_id' => '123', 'status' => 'approved'}))
+      ).to have_been_made
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.set_affiliate_approval affiliate_id: 1, status: 'approved' }.to raise_error ArgumentError
+      end
+      it 'fails without affiliate_id' do
+        expect { subject.set_affiliate_approval id: 10, status: 'approved' }.to raise_error ArgumentError
+      end
+      it 'fails without status' do
+        expect { subject.set_affiliate_approval id: 10, affiliate_id: 1 }.to raise_error ArgumentError
+      end
+    end
+  end
 end
