@@ -1,6 +1,5 @@
 class HasOffersV3
   class Offer < Base
-
     def add_group(params)
       requires! params, [:id, :group_id]
       post_request 'addGroup', params
@@ -50,6 +49,11 @@ class HasOffersV3
       post_request 'getApprovedAffiliateIds', params
     end
 
+    def set_affiliate_approval(params = {})
+      requires! params, [:id, :affiliate_id, :status]
+      post_request 'setAffiliateApproval', params
+    end
+
     def set_payout(params = {})
       requires! params, [:id, :affiliate_id]
       post_request 'setPayout', params
@@ -75,9 +79,9 @@ class HasOffersV3
       post_request 'getTierPayouts', params
     end
 
-    def unblock_affilate(params = {})
+    def unblock_affiliate(params = {})
       requires! params, [:id, :affiliate_id]
-      post_request 'unblockAffilate', params
+      post_request 'unblockAffiliate', params
     end
   end
 end

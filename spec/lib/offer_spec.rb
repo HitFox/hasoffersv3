@@ -185,21 +185,21 @@ describe HasOffersV3::Offer do
     end
   end
 
-  describe '#unblock_affilate' do
+  describe '#unblock_affiliate' do
     it 'makes a proper request call' do
       stub_call
-      response = subject.unblock_affilate id: 1, affiliate_id: 123
+      response = subject.unblock_affiliate id: 1, affiliate_id: 123
       expect(a_request(:post, url).with(
-        body: hash_including({'Method' => 'unblockAffilate','id' => '1','affiliate_id' => '123'}))
+        body: hash_including({'Method' => 'unblockAffiliate','id' => '1','affiliate_id' => '123'}))
       ).to have_been_made
     end
 
     context 'when required params are missing' do
       it 'fails without id' do
-        expect { subject.unblock_affilate affiliate_id: 1 }.to raise_error ArgumentError
+        expect { subject.unblock_affiliate affiliate_id: 1 }.to raise_error ArgumentError
       end
       it 'fails without affiliate_id' do
-        expect { subject.unblock_affilate id: 10 }.to raise_error ArgumentError
+        expect { subject.unblock_affiliate id: 10 }.to raise_error ArgumentError
       end
     end
   end
@@ -239,6 +239,28 @@ describe HasOffersV3::Offer do
       end
       it 'fails without group_id' do
         expect { subject.add_group id: 10 }.to raise_error ArgumentError
+      end
+    end
+  end
+
+  describe '#set_affiliate_approval' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.set_affiliate_approval id: 1, affiliate_id: 123, status: 'approved'
+      expect(a_request(:post, url).with(
+        body: hash_including({'Method' => 'setAffiliateApproval','id' => '1','affiliate_id' => '123', 'status' => 'approved'}))
+      ).to have_been_made
+    end
+
+    context 'when required params are missing' do
+      it 'fails without id' do
+        expect { subject.set_affiliate_approval affiliate_id: 1, status: 'approved' }.to raise_error ArgumentError
+      end
+      it 'fails without affiliate_id' do
+        expect { subject.set_affiliate_approval id: 10, status: 'approved' }.to raise_error ArgumentError
+      end
+      it 'fails without status' do
+        expect { subject.set_affiliate_approval id: 10, affiliate_id: 1 }.to raise_error ArgumentError
       end
     end
   end
