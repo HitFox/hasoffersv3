@@ -1,3 +1,6 @@
+# 0.5.3
+- [#55] Offer set affiliate status. (@moofkit)
+
 # 0.5.2
 - [#54] Added Offer::addGroup method
 - [#51] Added Offer::create, Offer::addTargetCountry and Offer::unblockAffiliate methods
