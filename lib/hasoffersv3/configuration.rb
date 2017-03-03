@@ -20,7 +20,9 @@ class HasOffersV3
       network_id: '',
       api_key: '',
       json_driver: self.default_json_driver,
-      logger: nil
+      logger: nil,
+      proxy_host: nil,
+      proxy_port: nil,
     }.freeze
 
     DEFAULTS.keys.each do |option_name|
