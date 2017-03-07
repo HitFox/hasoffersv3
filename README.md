@@ -21,13 +21,17 @@ Supported ruby versions:
 
 First, check if the method you want to call is already defined in `hasoffersv3/lib/hasoffersv3/*`. If not, you will need to add the method yourself (either just use your fork or submit a PR with your changes).
 
-Next, create an initializer in your project in `config/intializers` and configure your API credentials like so:
+Next, create an initializer in your project in `config/intializers`:
 
 ```ruby
 HasOffersV3.configure do |config|
-  config.api_key      = ENV['YOUR_HAS_OFFERS_API_KEY']
-  config.network_id   = ENV['YOUR_HAS_OFFERS_NETWORK_ID']
+  config.api_key      = 'Your HasOffers API Key'
+  config.network_id   = 'Your HasOffers Network ID'
   config.read_timeout = 10
+
+  # Optionally configure a proxy:
+  config.proxy_host   = 'yourproxy.com'
+  config.proxy_port   = 8080
 end
 ```
 

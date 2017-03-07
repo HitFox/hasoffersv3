@@ -1,3 +1,6 @@
+# 0.5.4
+- [#56] Enable configuring proxy. (@wowawiwa)
+
 # 0.5.3
 - [#55] Offer set affiliate status. (@moofkit)
 
