@@ -22,7 +22,7 @@ class HasOffersV3
       post_request 'updatePaymentMethodPaypal', params
     end
 
-    def create (params = {})
+    def create(params = {})
       requires! params, [:data]
       requires! params[:data], [:zipcode, :company]
       post_request 'create', params

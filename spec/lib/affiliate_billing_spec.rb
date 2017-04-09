@@ -1,6 +1,35 @@
 describe HasOffersV3::AffiliateBilling do
   let(:url) { api_url 'AffiliateBilling' }
 
+  describe '#find_all_invoices' do
+    it 'makes a proper request call' do
+      stub_call
+      response = subject.find_all_invoices
+      expect(a_request(:post, url).with(body: hash_including({'Method' => 'findAllInvoices'}))).to have_been_made
+      validate_call response
+    end
+  end
+
+  describe '#find_all_invoices_by_ids' do
+    context 'when ids is specified' do
+      it 'makes a proper request call' do
+        stub_call
+        response = subject.find_all_invoices_by_ids(ids: [1, 2, 3])
+        expect(a_request(:post, url).with(body: hash_including({
+          'Method' => 'findAllInvoicesByIds',
+          'ids' => ['1', '2', '3']
+        }))).to have_been_made
+        validate_call response
+      end
+    end
+
+    context 'when ids is not specified' do
+      it 'raises an exception' do
+        expect { subject.find_all_invoices_by_ids }.to raise_error ArgumentError
+      end
+    end
+  end
+
   describe '#find_last_invoice' do
     context 'when affiliate ID is specified' do
       it 'makes a proper request call' do

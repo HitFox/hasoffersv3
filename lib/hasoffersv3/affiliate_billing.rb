@@ -1,5 +1,14 @@
 class HasOffersV3
   class AffiliateBilling < Base
+    def find_all_invoices(params = {})
+      post_request 'findAllInvoices', params
+    end
+
+    def find_all_invoices_by_ids(params = {})
+      requires! params, [:ids]
+      post_request 'findAllInvoicesByIds', params
+    end
+
     def find_last_invoice(params = {})
       requires! params, [:affiliate_id]
       post_request 'findLastInvoice', params
