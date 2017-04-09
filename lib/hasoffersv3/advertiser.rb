@@ -12,5 +12,10 @@ class HasOffersV3
       requires! params, [:id]
       post_request 'findById', params
     end
+
+    def get_signup_answers(params = {})
+      requires! params, [:id]
+      post_request 'getSignupAnswers', params
+    end
   end
 end
