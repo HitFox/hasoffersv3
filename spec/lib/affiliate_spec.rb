@@ -96,4 +96,23 @@ describe HasOffersV3::Affiliate do
     end
   end
 
+  describe '#get_signup_answers' do
+    context 'when ID is specified' do
+      it 'makes a proper request call' do
+        stub_call
+        response = subject.get_signup_answers id: 1
+        expect(a_request(:post, url).with(body: hash_including({
+          'Method' => 'getSignupAnswers',
+          'id' => '1'
+        }))).to have_been_made
+        validate_call response
+      end
+    end
+
+    context 'when there is no ID' do
+      it 'raises exception' do
+        expect { subject.get_signup_answers }.to raise_error ArgumentError
+      end
+    end
+  end
 end
