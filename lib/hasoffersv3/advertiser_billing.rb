@@ -4,6 +4,11 @@ class HasOffersV3
       post_request 'findAllInvoices', params
     end
 
+    def find_all_invoices_by_ids(params = {})
+      requires! params, [:ids]
+      post_request 'findAllInvoicesByIds', params
+    end
+
     def create_invoice(params = {})
       requires! params, [:data]
       post_request 'createInvoice', params
