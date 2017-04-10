@@ -1,3 +1,7 @@
+# 0.5.5
+- [#58] Added `AdvertiserBilling::findAllInvoicesByIds`, `AffiliateBilling::findAllInvoicesByIds` methods. (@kamil89)
+- [#59] Added `Advertiser::getSingupAnswers` and `Affiliate::getSingupAnswers` methods. (@kamil89)
+
 # 0.5.4
 - [#56] Enable configuring proxy. (@wowawiwa)
 
