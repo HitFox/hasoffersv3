@@ -32,7 +32,9 @@ class HasOffersV3
 
       logger.log_response(http_response)
 
-      Response.new(http_response, @configuration.json_driver)
+      with_error_detection do
+        Response.new(http_response, @configuration.json_driver)
+      end
     end
 
     def execute_request(net_http, raw_request)
@@ -73,5 +75,15 @@ class HasOffersV3
       configuration.http_logger
     end
 
+    def with_error_detection
+      response = yield
+
+      raise HTTPError.from_response(response) unless response.http_ok?
+      # TODO: implement
+      # raise APIError.from_response(response) unless response.http_ok?
+      # raise UnknownError.from_response(response) unless response.success?
+
+      response
+    end
   end
 end

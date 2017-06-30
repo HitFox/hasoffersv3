@@ -15,7 +15,11 @@ class HasOffersV3
     end
 
     def success?
-      @http_status_code.to_s == '200' and status == 1
+      http_ok? && status == 1
+    end
+
+    def http_ok?
+      @http_status_code.to_s == '200'
     end
 
     def status
