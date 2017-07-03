@@ -4,14 +4,9 @@ require 'active_support/core_ext/module/delegation'
 class HasOffersV3
   class Error < StandardError; end
 
-  class ResponseParseError < Error; end
-
-  class HTTPError < Error
-    delegate :http_status_code, :http_message, :http_headers, to: :@response
-
-    def self.from_response(response)
-      new('HTTP error when accessing HOv3API', response)
-    end
+  class ResponseError < Error
+    attr_reader :response
+    delegate :http_status_code, :http_message, :http_headers, to: :response
 
     def initialize(message, response)
       super(message)
@@ -19,11 +14,11 @@ class HasOffersV3
     end
   end
 
-  class APIError < Error
+  class ParseError < ResponseError; end
 
-
+  class HTTPError < ResponseError
+    def self.from_response(response)
+      new("HTTP error: #{response.http_message}", response)
+    end
   end
-  class IPNotWhitelisted < APIError; end
-  class DatabaseError < APIError; end
-  class UnknownError < APIError; end
 end

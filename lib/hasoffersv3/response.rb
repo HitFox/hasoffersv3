@@ -6,7 +6,7 @@ class HasOffersV3
       begin
         @body = json.load(response.body.to_s)
       rescue
-        raise ResponseParseError, 'Error parsing response body, examine the `cause` property for details'
+        raise ParseError.new('Error parsing response body, examine the `cause` property for details', response)
       end
 
       @http_status_code = response.code
@@ -15,11 +15,15 @@ class HasOffersV3
     end
 
     def success?
-      http_ok? && status == 1
+      http_ok? && status_ok?
     end
 
     def http_ok?
       @http_status_code.to_s == '200'
+    end
+
+    def status_ok?
+      status == 1
     end
 
     def status

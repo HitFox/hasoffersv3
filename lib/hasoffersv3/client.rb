@@ -77,11 +77,10 @@ class HasOffersV3
 
     def with_error_detection
       response = yield
+      return response unless configuration.raise_errors
 
       raise HTTPError.from_response(response) unless response.http_ok?
-      # TODO: implement
-      # raise APIError.from_response(response) unless response.http_ok?
-      # raise UnknownError.from_response(response) unless response.success?
+      raise APIError.from_response(response) unless response.status_ok?
 
       response
     end
