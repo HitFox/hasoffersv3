@@ -28,6 +28,7 @@ HasOffersV3.configure do |config|
   config.api_key      = 'Your HasOffers API Key'
   config.network_id   = 'Your HasOffers Network ID'
   config.read_timeout = 10
+  config.raise_errors = true # add this if you want the hasoffersv3 to raise errors upon detected API error messages in responses
 
   # Optionally configure a proxy:
   config.proxy_host   = 'yourproxy.com'
