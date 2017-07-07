@@ -5,6 +5,8 @@ class HasOffersV3
     def initialize(response, json=default_json_driver)
       begin
         @body = json.load(response.body.to_s)
+        # JSON.load fails to load data from escaped JSON strings, first time it just unescapes the string
+        @body = json.load(@body) if @body.is_a?(String)
       rescue
         raise ParseError.new('Error parsing response body, examine the `cause` property for details', response)
       end
