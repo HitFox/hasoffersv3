@@ -27,7 +27,7 @@ describe HasOffersV3::Client do
       let(:raise_errors) { true }
       let(:config) { HasOffersV3::Configuration.new(raise_errors: raise_errors) }
       let(:url) { api_url 'Advertiser' }
-      let(:response_body) { default_return[:body] }
+      let(:response_body) { JSON.load(default_return[:body]) } # it's more convenient for us to have response_body as a Ruby object
       let(:status) { default_return[:status] }
       let(:headers) { {} }
       let(:response) do
