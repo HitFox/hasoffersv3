@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'hasoffersv3/error'
-require 'hasoffersv3/api_error'
 
 describe HasOffersV3::Client do
   let(:config) { HasOffersV3::Configuration.new }
@@ -45,7 +43,7 @@ describe HasOffersV3::Client do
 
       subject { client.request(http_method, 'Advertiser', 'findAll', {}) }
 
-      shared_examples 'does not raise errors when setting is not applied' do
+      shared_examples 'does not raise errors when configured to not raise errors' do
         let(:raise_errors) { false }
 
         it 'does not raise errors' do
@@ -55,7 +53,7 @@ describe HasOffersV3::Client do
 
       context 'no errors' do
         it 'does not raise error if no error messages were detected' do
-
+          expect { subject }.not_to raise_error
         end
       end
 
@@ -79,7 +77,7 @@ describe HasOffersV3::Client do
           end
         end
 
-        it_behaves_like 'does not raise errors when setting is not applied'
+        it_behaves_like 'does not raise errors when configured to not raise errors'
       end
 
       context 'API errors' do
@@ -100,7 +98,7 @@ describe HasOffersV3::Client do
             expect { subject }.to raise_error(error_class, error_message)
           end
 
-          it_behaves_like 'does not raise errors when setting is not applied'
+          it_behaves_like 'does not raise errors when configured to not raise errors'
         end
 
         context 'IP is not whitelisted' do

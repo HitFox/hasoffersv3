@@ -1,9 +1,10 @@
 require 'net/http' if RUBY_VERSION < '2'
 require 'active_support/core_ext/object/to_query'
+require 'hasoffersv3/error'
+require 'hasoffersv3/api_error'
 
 class HasOffersV3
   class Client
-
     attr_accessor :configuration
 
     def initialize(configuration)
