@@ -1,3 +1,6 @@
+# 0.6.0
+- [#60] Added configurable (via `config.raise_errors = true`) raising of internal exceptions (`HasOffersV3::Error` and its descendants) on various API error conditions.  Incompatible changes: JSON parsing error now raises a `HasOffersV3::ParseError` that wraps the original error from a particular JSON driver used. (@vittorius)
+
 # 0.5.5
 - [#58] Added `AdvertiserBilling::findAllInvoicesByIds`, `AffiliateBilling::findAllInvoicesByIds` methods. (@kamil89)
 - [#59] Added `Advertiser::getSingupAnswers` and `Affiliate::getSingupAnswers` methods. (@kamil89)

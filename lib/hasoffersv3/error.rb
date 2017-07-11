@@ -14,8 +14,12 @@ class HasOffersV3
     end
   end
 
+  # An error caught when parsing the JSON response body got from API endpoint.
+  # Wraps the original JSON driver error emitted.
+  # Raised always (does not depend on the config settings).
   class ParseError < ResponseError; end
 
+  # Any HTTP error that has occurred during the call to the API endpoint (gateway timeout, internal server error etc.)
   class HTTPError < ResponseError
     def self.from_response(response)
       new("HTTP error: #{response.http_message}", response)

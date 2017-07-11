@@ -2,6 +2,7 @@
 require 'hasoffersv3/error'
 
 class HasOffersV3
+  # Any error emitted at business logic level of the HasOffersV3 API that is not fatal but tells that a particular operation cannot be performed.
   class APIError < ResponseError
     class << self
       def from_response(response)
