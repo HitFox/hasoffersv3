@@ -20,6 +20,7 @@ class HasOffersV3
       network_id: '',
       api_key: '',
       json_driver: self.default_json_driver,
+      raise_errors: false,
       logger: nil,
       proxy_host: nil,
       proxy_port: nil,

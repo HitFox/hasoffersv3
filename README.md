@@ -1,6 +1,7 @@
 ### Overview
 
 [![Build status](https://api.travis-ci.org/applift/hasoffersv3.png?branch=master)](http://travis-ci.org/applift/hasoffersv3)
+[![Gem Version](https://badge.fury.io/rb/hasoffersv3.svg)](https://badge.fury.io/rb/hasoffersv3)
 
 ### Synopsis
 
@@ -28,6 +29,7 @@ HasOffersV3.configure do |config|
   config.api_key      = 'Your HasOffers API Key'
   config.network_id   = 'Your HasOffers Network ID'
   config.read_timeout = 10
+  config.raise_errors = true # add this if you want the hasoffersv3 to raise errors upon detected API error messages in responses; defaults to `false`
 
   # Optionally configure a proxy:
   config.proxy_host   = 'yourproxy.com'
@@ -71,6 +73,10 @@ HasOffersV3::Advertiser.signup({
   return_object: 1
 })
 ```
+
+### Error handling
+
+If `config.raise_errors` was set to `true`, the `hasoffersv3` will raise internal exceptions when error occurs at protocol or business logic level. See the [`HasOffersV3::Error`](https://github.com/applift/hasoffersv3/blob/master/lib/hasoffersv3/error.rb) and its descendants' definitions for more comments and details.
 
 ### Logging
 
