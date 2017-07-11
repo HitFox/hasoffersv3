@@ -1,9 +1,10 @@
 require 'net/http' if RUBY_VERSION < '2'
 require 'active_support/core_ext/object/to_query'
+require 'hasoffersv3/error'
+require 'hasoffersv3/api_error'
 
 class HasOffersV3
   class Client
-
     attr_accessor :configuration
 
     def initialize(configuration)
@@ -32,7 +33,9 @@ class HasOffersV3
 
       logger.log_response(http_response)
 
-      Response.new(http_response, @configuration.json_driver)
+      with_error_detection do
+        Response.new(http_response, @configuration.json_driver)
+      end
     end
 
     def execute_request(net_http, raw_request)
@@ -73,5 +76,14 @@ class HasOffersV3
       configuration.http_logger
     end
 
+    def with_error_detection
+      response = yield
+      return response unless configuration.raise_errors
+
+      raise HTTPError.from_response(response) unless response.http_ok?
+      raise APIError.from_response(response) unless response.status_ok?
+
+      response
+    end
   end
 end

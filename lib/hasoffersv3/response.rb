@@ -3,14 +3,27 @@ class HasOffersV3
     attr_reader :body, :http_status_code, :http_message, :http_headers
 
     def initialize(response, json=default_json_driver)
-      @body             = json.load(response.body.to_s)
+      begin
+        @body = json.load(response.body.to_s)
+      rescue
+        raise ParseError.new('Error parsing response body, examine the `cause` property for details', response)
+      end
+
       @http_status_code = response.code
       @http_message     = response.message
       @http_headers     = response.to_hash
     end
 
     def success?
-      @http_status_code.to_s == '200' and status == 1
+      http_ok? && status_ok?
+    end
+
+    def http_ok?
+      @http_status_code.to_s == '200'
+    end
+
+    def status_ok?
+      status == 1
     end
 
     def status
