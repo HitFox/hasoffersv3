@@ -1,3 +1,6 @@
+# 0.6.1
+- [#63] Added `HasOffersV3::Goal` method (@xingftw)
+
 # 0.6.0
 - [#61] Added configurable (via `config.raise_errors = true`) raising of internal exceptions (`HasOffersV3::Error` and its descendants) on various API error conditions.  Incompatible changes: JSON parsing error now raises a `HasOffersV3::ParseError` that wraps the original error from a particular JSON driver used. (@vittorius)
 
