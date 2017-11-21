@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.name          = 'hasoffersv3'
   s.version       = HasOffersV3::VERSION
   s.platform      = Gem::Platform::RUBY
-  s.authors       = ['Maximilian Seifert', 'Timo Rößner']
-  s.email         = ['ms@hitfox.com', 'tr@hitfox.com']
+  s.authors       = ['PubNative', 'Applift']
+  s.email         = ['tech@pubnative.net', 'tech@applift.com']
   s.summary       = %q{REST Client for the HasOffers API, version 3.}
   s.description   = %q{REST Client for the HasOffers API, version 3.}
   s.license       = "MIT"
